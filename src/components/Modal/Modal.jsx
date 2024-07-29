@@ -1,30 +1,23 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styles from './Modal.module.css';
+import style from './Modal.module.css';
 
-const Modal = ({ largeImageURL, onClose }) => {
+export const Modal = ({ onModalClose, largeImageURL }) => {
   useEffect(() => {
-    const handleKeyDown = event => {
-      if (event.code === 'Escape') {
-        onClose();
+    const handleKeyDown = e => {
+      if (e.keyCode === 27 || e.currentTarget === e.target) {
+        return onModalClose();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
-
-  const handleOverlayClick = event => {
-    if (event.target === event.currentTarget) {
-      onClose();
-    }
-  };
+  }, [onModalClose]);
 
   return (
-    <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div className={styles.modal}>
+    <div className={style.Overlay} onClick={onModalClose}>
+      <div className={style.Modal}>
         <img src={largeImageURL} alt="" />
       </div>
     </div>
@@ -32,8 +25,6 @@ const Modal = ({ largeImageURL, onClose }) => {
 };
 
 Modal.propTypes = {
+  onModalClose: PropTypes.func,
   largeImageURL: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
-
-export default Modal;

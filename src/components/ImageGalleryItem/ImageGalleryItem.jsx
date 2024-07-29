@@ -1,22 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './ImageGalleryItem.module.css';
+import propTypes from 'prop-types';
+import style from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, onImageClick }) => (
-  <li className={styles.galleryItem}>
-    <img
-      src={webformatURL}
-      alt=""
-      className={styles.image}
-      onClick={() => onImageClick(largeImageURL)}
-    />
-  </li>
-);
- 
-ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-  onImageClick: PropTypes.func.isRequired,
+export const ImageGalleryItem = ({  webformatURL, largeImageURL, tags, onClickImage, }) => {
+  return (
+    <li className={style.ImageGalleryItem}>
+      <img
+        className={style.ImageGalleryItem_image}
+        src={webformatURL}
+        alt={tags}
+        onClick={() => {
+          onClickImage(largeImageURL);
+        }}
+      />
+    </li>
+  );
 };
 
-export default ImageGalleryItem;
+ImageGalleryItem.propTypes = {
+  largeImageURL: propTypes.string.isRequired,
+  tags: propTypes.string.isRequired,
+  webformatURL: propTypes.string.isRequired,
+  onClickImage: propTypes.func,
+};

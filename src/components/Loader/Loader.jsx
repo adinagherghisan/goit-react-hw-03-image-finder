@@ -1,16 +1,18 @@
 import React from 'react';
-import styles from './Loader.module.css';
-import { BallTriangle } from 'react-loader-spinner';
+import { ColorRing } from 'react-loader-spinner';
+import  style  from './Loader.module.css';
 
-const Loader = () => (
-  <div className={styles.loader}>
-    <BallTriangle
-      height={100}
-      width={100}
-      color="#00BFFF"
-      ariaLabel="loading"
-    />
-  </div>
-);
-
-export default Loader;
+export const Loader = () => {
+  return (
+    <div className={style.loader}>
+      <ColorRing
+        visible={true}
+        height={80}
+        width={80}
+        ariaLabel="blocks-loading"
+        className={style.blocks_wrapper}
+        color="#000" 
+      />
+    </div>
+  );
+};
